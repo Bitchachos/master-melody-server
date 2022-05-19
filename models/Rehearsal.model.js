@@ -12,7 +12,7 @@ const rehearsalSchema = new Schema({
         type: String,
         enum: ["Beginner", "Intermediate", "Advanced"]
     },
-    song: { type: Schema.Types.ObjectId, ref: 'Song' }
+    song: { type: Schema.Types.ObjectId, ref: "Song" }
 },
     {
         // this second object adds extra properties: `createdAt` and `updatedAt`
