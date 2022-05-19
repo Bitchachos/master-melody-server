@@ -44,6 +44,34 @@ router.get("/songs", (req, res, next) => {
         })
 })
 
+// READ song by id
+router.get("/songs/:songId", (req, res, next) => {
+  const { songId } = req.params;
 
+  Song.findById(songId)
+  .then( song => {
+    res.json(song)
+  })
+  .catch( e => {
+    console.log("error reading song details", e)
+  })
+
+})
+
+// UPDATE song by id
+router.put("/songs/:songId", (req, res, next) => {
+  const { songId } = req.params;
+
+  const newDetails = {
+        title: req.body.title,
+        artist: req.body.artist
+    }
+
+  Song.findByIdAndUpdate(songId, newDetails)
+  .then(song => {
+    res.json(song)
+  })
+  .catch(e => {console.log("error updating song", e)})
+})
 
 module.exports = router;
