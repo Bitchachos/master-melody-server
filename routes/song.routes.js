@@ -32,9 +32,7 @@ router.post("/songs", (req, res, next) => {
 // READ Songs
 router.get("/songs", (req, res, next) => {
   Song.find()
-        .then(response => {
-            res.json(response)
-        })
+        .then(response => res.json(response))
         .catch(err => {
             console.log("error getting list of songs", err);
             res.status(500).json({
@@ -49,12 +47,8 @@ router.get("/songs/:songId", (req, res, next) => {
   const { songId } = req.params;
 
   Song.findById(songId)
-  .then( song => {
-    res.json(song)
-  })
-  .catch( e => {
-    console.log("error reading song details", e)
-  })
+  .then( response => res.json(response))
+  .catch( e => console.log("error reading song details", e))
 
 })
 
@@ -68,10 +62,17 @@ router.put("/songs/:songId", (req, res, next) => {
     }
 
   Song.findByIdAndUpdate(songId, newDetails)
-  .then(song => {
-    res.json(song)
-  })
+  .then(response => res.json(response))
   .catch(e => {console.log("error updating song", e)})
 })
+
+// DELETE song
+router.delete('/songs/:songId', (req, res, next) => {
+  const { songId } = req.params;
+
+  Song.findByIdAndDelete(songId)
+      .then(response => res.json(response))
+      .catch(e => {console.log("error deleting song", e)})
+});
 
 module.exports = router;
