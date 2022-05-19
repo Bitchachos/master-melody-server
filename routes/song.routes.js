@@ -9,7 +9,7 @@ const { default: mongoose } = require("mongoose");
 
 const router = require("express").Router();
 
-// CREATE Song - GET
+// CREATE Song
   //Note: ADD middleware isLoggedIn,
 router.post("/songs", (req, res, next) => {
   const { title, artist } = req.body;
@@ -28,6 +28,7 @@ router.post("/songs", (req, res, next) => {
       });
   })
 });
+
 
 
 module.exports = router;
