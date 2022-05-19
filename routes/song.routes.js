@@ -29,6 +29,21 @@ router.post("/songs", (req, res, next) => {
   })
 });
 
+// READ Songs
+router.get("/songs", (req, res, next) => {
+  Song.find()
+        .then(response => {
+            res.json(response)
+        })
+        .catch(err => {
+            console.log("error getting list of songs", err);
+            res.status(500).json({
+                message: "error getting list of songs",
+                error: err
+            });
+        })
+})
+
 
 
 module.exports = router;
