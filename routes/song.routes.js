@@ -1,4 +1,4 @@
-// const isLoggedIn = require("../middleware/isLoggedIn");
+
 // const isOwner = require("../middleware/isOwner");
 // const fileUploader = require('../config/cloudinary.config');
 
@@ -10,7 +10,6 @@ const { default: mongoose } = require("mongoose");
 const router = require("express").Router();
 
 // CREATE Song
-  //Note: ADD middleware isLoggedIn,
 router.post("/songs", (req, res, next) => {
   const { title, artist } = req.body;
 

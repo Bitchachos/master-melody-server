@@ -1,5 +1,4 @@
-// const isLoggedIn = require("../middleware/isLoggedIn");
-// const isOwner = require("../middleware/isOwner");
+
 // const fileUploader = require('../config/cloudinary.config');
 
 const User = require("../models/User.model");
