@@ -2,8 +2,13 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const rehearsalSchema = new Schema({
-    date: Number,
-    time: Number,
+    date: {
+        type: Date,
+        default: Date.now
+    },
+    time: {
+        type: Number
+    },
     genre: {
         type: String,
         enum: ["Pop", "Rock", "Indie", "Jazz", "Metal", "Country"]
