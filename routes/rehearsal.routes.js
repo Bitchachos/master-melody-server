@@ -12,6 +12,11 @@ const router = require("express").Router();
 // CREATE rehearsal
   //Note: ADD middleware isLoggedIn,
 router.post("/rehearsals", (req, res, next) => {
+
+  // const genresArr = Rehearsal.schema.path("genre").enumValues;
+
+  // console.log(genresArr);
+
   const { date, time, genre, skillLevel, song } = req.body;
 
   const newRehearsal = {
@@ -31,7 +36,7 @@ router.post("/rehearsals", (req, res, next) => {
 
 // READ rehearsals
 router.get("/rehearsals", (req, res, next) => {
-  
+
   Rehearsal.find()
         .populate("song")
         .then(response => res.json(response))

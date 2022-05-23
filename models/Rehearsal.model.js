@@ -8,7 +8,7 @@ const rehearsalSchema = new Schema({
         required: [true, "Please select a valid date"]
     },
     time: {
-        type: Number
+        type: String
     },
     genre: {
         type: String,
