@@ -5,7 +5,7 @@ const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  res.json("All good in here");
+  res.json("All good in the hood");
 });
 
 router.use("/auth", authRoutes);
