@@ -12,7 +12,8 @@ const rehearsalSchema = new Schema({
     },
     genre: {
         type: String,
-        enum: ["Pop", "Rock", "Indie", "Jazz", "Metal", "Country"]
+        enum: ["Pop", "Rock", "Indie", "Jazz", "Metal", "Country"],
+        default: "Pop"
     },
     skillLevel: {
         type: String,
