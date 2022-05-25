@@ -12,10 +12,6 @@ const saltRounds = 10;
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
 
-router.get("/loggedin", (req, res) => {
-  res.json(req.user);
-});
-
 router.post("/signup", (req, res) => {
   const { email, password } = req.body;
 

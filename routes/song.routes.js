@@ -5,6 +5,7 @@
 const User = require("../models/User.model");
 const Song = require("../models/Song.model");
 const {isAuthenticated} = require("../middleware/jwt.middleware");
+const isOwner = require("../middleware/isOwner");
 
 const { default: mongoose } = require("mongoose");
 
@@ -16,7 +17,8 @@ router.post("/songs", isAuthenticated, (req, res, next) => {
 
   const newSong = {
     title,
-    artist
+    artist,
+    owner: req.payload._id
   }
   Song.create(newSong)
   .then(response => res.status(201).json(response))
@@ -53,12 +55,13 @@ router.get("/songs/:songId", (req, res, next) => {
 })
 
 // UPDATE song by id
-router.put("/songs/:songId", isAuthenticated, (req, res, next) => {
+router.put("/songs/:songId", isAuthenticated, isOwner, (req, res, next) => {
   const { songId } = req.params;
 
   const newDetails = {
         title: req.body.title,
-        artist: req.body.artist
+        artist: req.body.artist,
+        owner: req.payload._id
     }
 
   Song.findByIdAndUpdate(songId, newDetails)
@@ -67,7 +70,7 @@ router.put("/songs/:songId", isAuthenticated, (req, res, next) => {
 })
 
 // DELETE song
-router.delete('/songs/:songId', isAuthenticated, (req, res, next) => {
+router.delete('/songs/:songId', isAuthenticated, isOwner, (req, res, next) => {
   const { songId } = req.params;
 
   Song.findByIdAndDelete(songId)

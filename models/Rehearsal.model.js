@@ -20,7 +20,9 @@ const rehearsalSchema = new Schema({
         enum: ["Beginner", "Intermediate", "Advanced"],
         required: [true, "Please select a skill level"]
     },
-    song: [{ type: Schema.Types.ObjectId, ref: "Song" }]
+    song: [{ type: Schema.Types.ObjectId, ref: "Song" }],
+    owner: {type: Schema.Types.ObjectId, ref: "User"}
+    
 },
     {
         // this second object adds extra properties: `createdAt` and `updatedAt`
