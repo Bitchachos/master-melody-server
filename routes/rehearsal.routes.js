@@ -39,7 +39,9 @@ router.post("/rehearsals", isAuthenticated, (req, res, next) => {
 // READ rehearsals
 router.get("/rehearsals", (req, res, next) => {
 
-  Rehearsal.find()
+  // Rehearsal.find()
+  Rehearsal.find().sort({createdAt: -1})
+  // .then(res => {})
         .populate("song")
         .then(response => res.json(response))
         .catch(e => console.log("error finding rehearsal", e))
