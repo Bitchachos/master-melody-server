@@ -46,7 +46,10 @@ router.post("/signup", (req, res) => {
     .then((found) => {
       // If the user is found, send the message email is taken
       if (found) {
-        return res.status(400).json({ errorMessage: "email already taken." });
+        const myError = new Error();
+        myError.name = "errorMensaje";
+        myError.message = "Email already taken.";
+        throw myError;
       }
 
       const salt = bcryptjs.genSaltSync(saltRounds);
@@ -62,17 +65,12 @@ router.post("/signup", (req, res) => {
         _id: createdUser._id };
       res.status(201).json(user);
     })
-    .catch((error) => {
-      if (error instanceof mongoose.Error.ValidationError) {
-        return res.status(400).json({ errorMessage: error.message });
-      }
-      if (error.code === 11000) {
-        return res.status(400).json({
-          errorMessage:
-            "email need to be unique. The email you chose is already in use.",
-        });
-      }
-      return res.status(500).json({ errorMessage: error.message });
+    .catch((err) => {
+      if(err.name === "userExists"){
+        res.status(400).json({ message: err.message });
+    } else {
+        res.status(500).json({ message: "Internal Server Error: error creating new user" })
+    }
     });
 });
 
