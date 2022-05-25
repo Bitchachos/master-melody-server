@@ -4,13 +4,14 @@
 
 const User = require("../models/User.model");
 const Song = require("../models/Song.model");
+const {isAuthenticated} = require("../middleware/jwt.middleware");
 
 const { default: mongoose } = require("mongoose");
 
 const router = require("express").Router();
 
 // CREATE Song
-router.post("/songs", (req, res, next) => {
+router.post("/songs", isAuthenticated, (req, res, next) => {
   const { title, artist } = req.body;
 
   const newSong = {
@@ -52,7 +53,7 @@ router.get("/songs/:songId", (req, res, next) => {
 })
 
 // UPDATE song by id
-router.put("/songs/:songId", (req, res, next) => {
+router.put("/songs/:songId", isAuthenticated, (req, res, next) => {
   const { songId } = req.params;
 
   const newDetails = {
@@ -66,7 +67,7 @@ router.put("/songs/:songId", (req, res, next) => {
 })
 
 // DELETE song
-router.delete('/songs/:songId', (req, res, next) => {
+router.delete('/songs/:songId', isAuthenticated, (req, res, next) => {
   const { songId } = req.params;
 
   Song.findByIdAndDelete(songId)

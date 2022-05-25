@@ -4,14 +4,14 @@
 const User = require("../models/User.model");
 const Song = require("../models/Song.model");
 const Rehearsal = require("../models/Rehearsal.model");
+const {isAuthenticated} = require("../middleware/jwt.middleware");
 
 const { default: mongoose } = require("mongoose");
 
 const router = require("express").Router();
 
 // CREATE rehearsal
-  //Note: ADD middleware isLoggedIn,
-router.post("/rehearsals", (req, res, next) => {
+router.post("/rehearsals", isAuthenticated, (req, res, next) => {
 
   // const genresArr = Rehearsal.schema.path("genre").enumValues;
 
@@ -54,7 +54,7 @@ router.get("/rehearsals/:rehearsalId", (req, res, next) => {
 });
 
 // UPDATE rehearsal by id
-router.put("/rehearsals/:rehearsalId", (req, res, next) => {
+router.put("/rehearsals/:rehearsalId", isAuthenticated, (req, res, next) => {
   const { date, time, genre, skillLevel, song } = req.body;
   const { rehearsalId } = req.params;
 
@@ -68,8 +68,16 @@ router.put("/rehearsals/:rehearsalId", (req, res, next) => {
 
   Rehearsal.findByIdAndUpdate(rehearsalId, newDetails)
   .then(response => res.json(response))
-  .catch(e => {console.log("error updating rehearsal", e)})
+  .catch(e => console.log("error updating rehearsal", e))
 })
 
+// DELETE rehearsal
+router.delete("/rehearsals/:rehearsalId", isAuthenticated, (req, res, next) => {
+  const { rehearsalId } = req.params;
+
+  Rehearsal.findByIdAndDelete(rehearsalId)
+      .then(response => res.json(response))
+      .catch(e => console.log("error deleting rehearsal", e))
+});
 
 module.exports = router;
