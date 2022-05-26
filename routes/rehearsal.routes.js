@@ -5,7 +5,7 @@ const User = require("../models/User.model");
 const Song = require("../models/Song.model");
 const Rehearsal = require("../models/Rehearsal.model");
 const {isAuthenticated} = require("../middleware/jwt.middleware");
-const isPlayer = require("../middleware/isPlayer");
+const isRehearsalCreator = require("../middleware/isRehearsalCreator");
 
 const { default: mongoose } = require("mongoose");
 
@@ -57,7 +57,7 @@ router.get("/rehearsals/:rehearsalId", (req, res, next) => {
 });
 
 // UPDATE rehearsal by id
-router.put("/rehearsals/:rehearsalId", isAuthenticated, isPlayer, (req, res, next) => {
+router.put("/rehearsals/:rehearsalId", isAuthenticated, isRehearsalCreator, (req, res, next) => {
   const { name, date, time, genre, skillLevel, song } = req.body;
   const { rehearsalId } = req.params;
 
@@ -77,7 +77,7 @@ router.put("/rehearsals/:rehearsalId", isAuthenticated, isPlayer, (req, res, nex
 })
 
 // DELETE rehearsal
-router.delete("/rehearsals/:rehearsalId", isAuthenticated, isPlayer, (req, res, next) => {
+router.delete("/rehearsals/:rehearsalId", isAuthenticated, isRehearsalCreator, (req, res, next) => {
   const { rehearsalId } = req.params;
 
   Rehearsal.findByIdAndDelete(rehearsalId)

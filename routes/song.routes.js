@@ -1,11 +1,9 @@
-
-// const isOwner = require("../middleware/isOwner");
 // const fileUploader = require('../config/cloudinary.config');
 
 const User = require("../models/User.model");
 const Song = require("../models/Song.model");
 const {isAuthenticated} = require("../middleware/jwt.middleware");
-const isOwner = require("../middleware/isOwner");
+const isSongCreator = require("../middleware/isSongCreator");
 
 const { default: mongoose } = require("mongoose");
 
@@ -55,7 +53,7 @@ router.get("/songs/:songId", (req, res, next) => {
 })
 
 // UPDATE song by id
-router.put("/songs/:songId", isAuthenticated, isOwner, (req, res, next) => {
+router.put("/songs/:songId", isAuthenticated, isSongCreator, (req, res, next) => {
   const { songId } = req.params;
 
   const newDetails = {
@@ -70,7 +68,7 @@ router.put("/songs/:songId", isAuthenticated, isOwner, (req, res, next) => {
 })
 
 // DELETE song
-router.delete('/songs/:songId', isAuthenticated, isOwner, (req, res, next) => {
+router.delete('/songs/:songId', isAuthenticated, isSongCreator, (req, res, next) => {
   const { songId } = req.params;
 
   Song.findByIdAndDelete(songId)
