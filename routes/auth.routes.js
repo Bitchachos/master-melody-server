@@ -19,23 +19,15 @@ router.post("/signup", (req, res) => {
     return res.status(400).json({ errorMessage: "Please provide your email." });
   }
 
-  if (password.length < 8) {
-    return res.status(400).json({
-      errorMessage: "Your password needs to be at least 8 characters long.",
-    });
-  }
-
-  //   ! This use case is using a regular expression to control for special characters and min length
-  /*
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+  const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
 
   if (!regex.test(password)) {
     return res.status(400).json( {
-      errorMessage:
-        "Password needs to have at least 8 chars and must contain at least one number, one lowercase and one uppercase letter.",
+      myError:
+        "Password needs to have between 8 and 20 characters, at least one number, one lowercase and one uppercase letter and a special character."
     });
   }
-  */
+
 
   // Search the database for a user with the email submitted in the form
   User.findOne({ email })
@@ -63,7 +55,7 @@ router.post("/signup", (req, res) => {
     })
     .catch((err) => {
       if(err.name === "userExists"){
-        res.status(400).json({ message: err.message });
+        res.status(400).json({ message: myError.message });
     } else {
         res.status(500).json({ message: "Internal Server Error: error creating new user" })
     }
