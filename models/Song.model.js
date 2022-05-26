@@ -11,6 +11,9 @@ const songSchema = new Schema({
         required: [true, "Please enter the artist"]
     },
     owner: { type: Schema.Types.ObjectId, ref: "User" }
+},
+{
+    timestamps: true,
 });
 
 const Song = model("Song", songSchema);
