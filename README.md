@@ -17,6 +17,41 @@ To run the app:
 
 To run on localhost, enter npm run dev in the terminal.
 
+## API Endpoints
+
+<br/>
+
+**Auth endpoints**
+
+| HTTP verb   | Path | Request Headers | Request body  | Description |
+| ------------- | ------------- | ------------- |------------- | ------------- |
+| POST  | /api/auth/signup  | –  | { email: String, password: String }  | Create an account  |
+| POST  | /api/auth/login  | –  | { email: String, password: String }  | Login  |
+| GET  | /api/auth/verify  | Authorization: Bearer `<jwt>`  | –  | Verify jwt  |
+
+<br/>
+
+**Song**
+
+| HTTP verb   | Path | Request Headers | Request body  | Description |
+| ------------- | ------------- | ------------- |------------- | ------------- |
+| POST  | /api/songs  | Authorization: Bearer `<jwt>`  | { title: String, artist: String }  | Create a new song  |
+| GET  | /api/songs  | –  | –  | Get all songs  |
+| GET  | /api/songs/:songId  | –  | – | Get song details  |
+| PUT  | /api/songs/:songId  | Authorization: Bearer `<jwt>`  | { title: String, artist: String, tasks: Array }  | Update a song  |
+| DELETE  | /api/songs/:songId  | Authorization: Bearer `<jwt>`  | – | Delete a song  |
+
+**Rehearsal**
+
+| HTTP verb   | Path | Request Headers | Request body  | Description |
+| ------------- | ------------- | ------------- |------------- | ------------- |
+| POST  | /api/rehearsals  | Authorization: Bearer `<jwt>`  | { name: String, date: date, time: String, genre: String, skillLevel: String, song: Array, owner: Array }  | Create a new rehearsal  |
+| GET  | /api/rehearsals  | –  | –  | Get all rehearsals  |
+| GET  | /api/rehearsals/:rehearsalId  | –  | – | Get rehearsal details  |
+| PUT  | /api/rehearsals/:rehearsalId  | Authorization: Bearer `<jwt>`  | { title: String, artist: String, tasks: Array }  | Update a rehearsal  |
+| DELETE  | /api/rehearsals/:rehearsalId  | Authorization: Bearer `<jwt>`  | – | Delete a rehearsal  |
+
+
 # Technologies Used
 - JavaScript
 - Node.js
