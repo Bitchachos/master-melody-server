@@ -30,8 +30,6 @@ router.post("/rehearsals", isAuthenticated, (req, res, next) => {
     owner: req.payload._id
   }
 
-  console.log(song)
-
   Rehearsal.create(newRehearsal)
   .then(rehearsal => res.json(rehearsal))
   .catch(e => console.log("error creating song", e))
