@@ -38,7 +38,7 @@ To run on localhost, enter npm run dev in the terminal.
 | POST  | /api/songs  | Authorization: Bearer `<jwt>`  | { title: String, artist: String }  | Create a new song  |
 | GET  | /api/songs  | –  | –  | Get all songs  |
 | GET  | /api/songs/:songId  | –  | – | Get song details  |
-| PUT  | /api/songs/:songId  | Authorization: Bearer `<jwt>`  | { title: String, artist: String, tasks: Array }  | Update a song  |
+| PUT  | /api/songs/:songId  | Authorization: Bearer `<jwt>`  | { title: String, artist: String }  | Update a song  |
 | DELETE  | /api/songs/:songId  | Authorization: Bearer `<jwt>`  | – | Delete a song  |
 
 **Rehearsal**
@@ -48,7 +48,7 @@ To run on localhost, enter npm run dev in the terminal.
 | POST  | /api/rehearsals  | Authorization: Bearer `<jwt>`  | { name: String, date: date, time: String, genre: String, skillLevel: String, song: Array, owner: Array }  | Create a new rehearsal  |
 | GET  | /api/rehearsals  | –  | –  | Get all rehearsals  |
 | GET  | /api/rehearsals/:rehearsalId  | –  | – | Get rehearsal details  |
-| PUT  | /api/rehearsals/:rehearsalId  | Authorization: Bearer `<jwt>`  | { title: String, artist: String, tasks: Array }  | Update a rehearsal  |
+| PUT  | /api/rehearsals/:rehearsalId  | Authorization: Bearer `<jwt>`  | { name: String, date: date, time: String, genre: String, skillLevel: String, song: Array, owner: Array }  | Update a rehearsal  |
 | DELETE  | /api/rehearsals/:rehearsalId  | Authorization: Bearer `<jwt>`  | – | Delete a rehearsal  |
 
 
