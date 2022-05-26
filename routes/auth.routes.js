@@ -34,10 +34,14 @@ router.post("/signup", (req, res) => {
     .then((found) => {
       // If the user is found, send the message email is taken
       if (found) {
-        const myError = new Error();
-        myError.name = "errorMensaje";
-        myError.message = "Email already taken.";
-        throw myError;
+        return res.status(400).json( {
+          myError:
+            "Email already taken."
+        })
+        // const myError = new Error();
+        // myError.name = "errorMensaje";
+        // myError.message = "Email already taken.";
+        // throw myError;
       }
 
       const salt = bcryptjs.genSaltSync(saltRounds);
