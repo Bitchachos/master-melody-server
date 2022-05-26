@@ -33,7 +33,7 @@ router.post("/songs", isAuthenticated, (req, res, next) => {
 
 // READ Songs
 router.get("/songs", (req, res, next) => {
-  Song.find()
+  Song.find().sort({createdAt: -1})
         .then(response => res.json(response))
         .catch(err => {
             console.log("error getting list of songs", err);
