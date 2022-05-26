@@ -18,9 +18,10 @@ router.post("/rehearsals", isAuthenticated, (req, res, next) => {
 
   // console.log(genresArr);
 
-  const { date, time, genre, skillLevel, song } = req.body;
+  const { name, date, time, genre, skillLevel, song } = req.body;
 
   const newRehearsal = {
+    name,
     date,
     time,
     genre,
@@ -57,10 +58,11 @@ router.get("/rehearsals/:rehearsalId", (req, res, next) => {
 
 // UPDATE rehearsal by id
 router.put("/rehearsals/:rehearsalId", isAuthenticated, isPlayer, (req, res, next) => {
-  const { date, time, genre, skillLevel, song } = req.body;
+  const { name, date, time, genre, skillLevel, song } = req.body;
   const { rehearsalId } = req.params;
 
   const newDetails = {
+    name,
     date,
     time,
     genre,

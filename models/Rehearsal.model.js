@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const rehearsalSchema = new Schema({
+    name: {
+        type: String,
+        default: "My Rehearsal"
+    },
     date: {
         type: Date,
         default: Date.now,
