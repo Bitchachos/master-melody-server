@@ -104,11 +104,11 @@ router.post('/login', (req, res, next) => {
           { algorithm: 'HS256', expiresIn: "6h" }
         );
 
-        // Send the token as the response
+        // Send the token as the response to authenticate the user
         res.json({ authToken: authToken });
       }
       else {
-        res.status(401).json({ message: "Unable to authenticate the user" });
+        res.status(401).json({ myError: "Please enter a valid password." });
       }
 
     })
