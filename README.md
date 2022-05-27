@@ -1,5 +1,5 @@
 # Description
-Backend (Express API) of React-based app canolled Master Melody
+Backend (Express API) of React-based app called Master Melody
 meant to connect musicians learning to play musical instruments.
 Great for individual use and pair-play.
 
